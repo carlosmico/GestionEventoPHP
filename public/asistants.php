@@ -36,7 +36,7 @@ if(isset($_GET['deleteId'])){
 
         <div class="asistantsList">
                 <div class="asistant asistantHeader">
-                    <span>NºENTRADA</span>
+                    <span>TICKET</span>
                     <span>NOMBRE</span>
                     <span>EMAIL</span>
                     <span>EDAD</span>
@@ -47,6 +47,7 @@ if(isset($_GET['deleteId'])){
                 </div>
             <?php
                 foreach ($auth->getAsistants() as $asistant) {
+                    if($asistant['email'] != "admin"){
             ?>
                 <div class="asistant">
                     <span>#<?php echo $asistant['id'] ?></span>
@@ -60,7 +61,8 @@ if(isset($_GET['deleteId'])){
                         <img src="https://images.vexels.com/media/users/3/128556/isolated/preview/85f5b98f0add824f50e0ec19316c1e6b-reciclaje-de-basura-symbol2-svg-by-vexels.png" alt="">
                     </a>
                 </div>
-            <?php       
+            <?php     
+                    }  
                 }
             ?>
         </div>

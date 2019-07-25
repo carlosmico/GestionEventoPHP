@@ -42,7 +42,7 @@ require_once __DIR__.'/../vendor/autoload.php';
         );
 
         if($userRegistered == 1){
-          header("Location: index.php");
+          $auth -> login($_POST['email'], $_POST['password']);
         }else{
           $error = "Fallo en el registro: " . $userRegistered;
         }
@@ -69,7 +69,12 @@ require_once __DIR__.'/../vendor/autoload.php';
         include __DIR__.'/../assets/menu.php';
     ?>
 
-    <form action="register.php" name="register" method="post">
+    <div class="formsPage">
+      
+
+      <form action="register.php" name="register" method="post">
+        <h1>Registro</h1>
+        
         <div class="form-group">
             <label>Email</label>
             <input type="email" class="form-control" aria-describedby="emailHelp" name="email"
@@ -131,7 +136,8 @@ require_once __DIR__.'/../vendor/autoload.php';
         <div>
           <button type="submit" class="btn btn-primary" name="action" value="register">Registrar</button>
         </div>
-    </form>
+      </form>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

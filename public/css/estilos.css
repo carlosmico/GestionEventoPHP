@@ -13,11 +13,29 @@ form{
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    max-width: 900px;
+    border: 3px solid lightgray;
+    border-radius: 16px;
+}
+
+form > h1{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+.form-control{
+    max-width: 300px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form div{
-    min-width: 250px;
-    width: 40vw;
+    width: 300px;
 }
 
 form div:last-child{
@@ -26,6 +44,10 @@ form div:last-child{
     align-items: center;
     justify-content: center;
     margin-top: 1em;
+}
+
+.alert-success{
+    width: 90%;
 }
 
 .btn-primary{
@@ -125,7 +147,71 @@ form div:last-child{
     margin: 1em;
 }
 
+/* MAIN.PHP */
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent .leftTime{
+    all: unset;
+    background-color: #641d36;
+    color: white;
+    padding: 1em;
+    align-self: stretch;
+    text-align: center;
+}
+
+.mainContent .leftTime > h2{
+    font-size: 1.5em;
+}
+
+.mainContent > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1em;
+}
+
+@media(max-width: 685px){
+    .mainContent > div:nth-child(2){
+        flex-direction: column;
+    }
+}
+
+.mainContent > div:nth-child(2) > span{
+    color: #e82f8c;
+    font-size: 2em;
+    padding: 0.5em;
+}
+
+.mainContent > div:nth-child(2)>a{
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 1em;
+    padding: 1em;
+    background-color: #e8508b;
+    color: white;
+    /* border-radius: 10px; */
+}
+
+.mainContent > div:nth-child(2) > *{
+    /* margin: 1em; */
+}
+
 /* LOGIN.PHP */
+
+.formsPage{
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .loginForm{
     flex-direction: column;
@@ -238,4 +324,30 @@ form div:last-child{
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+/* IMPRIMIRTICKET.PHP */
+
+.printTicket{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    background-color: yellow;
+    height: 100vh;
+}
+
+.personalData{
+    margin-top: 2em;
+}
+
+.personalData > p{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.4em;
+    color: #e82f8c;
+}
+
+.personalData > p > span{
+    color: #631d36;
 }

@@ -3,20 +3,6 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Geeks\controller\Autenticacion as Auth;
 
 $a=new Auth();
-
-$error=null;
-
-    if(isset($_POST)&&count($_POST)>0)
-    {
-        if($_POST["action"]=="register"){
-            $error=$a->registrar($_POST);
-        }elseif($_POST["action"]=="login"){
-            $error=$a->logar($_POST);
-            if($error==null){
-                header('Location: reto1.php');
-            }
-        }
-    }
 ?>
 
 <!DOCTYPE html>

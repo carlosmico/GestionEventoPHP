@@ -6,6 +6,24 @@ use Geeks\controller\Autenticacion as Auth;
 $auth=new Auth();
 
 $error = null;
+$goodMessage = null;
+
+if(isset($_POST['action']) && $_POST['action'] == "update"){
+    //Comprobacion de campos
+    if($_POST['password'] == ""){
+        $error = "La contraseña no puede estar vacía";
+    }else if(intval($_POST['age']) <= 0){
+        $error = "La edad debe ser un valor númerico y mayor que 0";
+    }else{
+        $userUpdated = $auth -> updateUser($_SESSION['id'], $_POST);
+
+        if(!$userUpdated){
+            $error = "Error al actualizar los datos";
+        }else{
+            $goodMessage = "Datos actualizados correctamente"; 
+        }
+    }
+}
 
 $user = $auth -> getUser($_SESSION['id'])[0];
 ?>
@@ -36,6 +54,8 @@ $user = $auth -> getUser($_SESSION['id'])[0];
         </div>
 
         <form class="profileForm" action="profile.php" method="post">
+            <!-- <h1>Datos personales</h1> -->
+            
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" name="email" placeholder="Introduce email"
@@ -68,7 +88,7 @@ $user = $auth -> getUser($_SESSION['id'])[0];
 
             <div class="form-group">
                 <label>Contraseña</label>
-                <input type="password" class="form-control" name="password" placeholder="Introduce contraseña">
+                <input type="password" class="form-control" name="password" placeholder="Introduce contraseña" value="<?php echo $user['password']?>">
             </div>
 
             <?php
@@ -76,6 +96,16 @@ $user = $auth -> getUser($_SESSION['id'])[0];
                     ?>
             <div class="alert alert-danger" role="alert">
                 <?=$error?>
+            </div>
+            <?php                         
+                      }
+            ?>
+
+            <?php
+            if ($goodMessage != null) {
+                    ?>
+            <div class="alert alert-success" role="alert">
+                <?=$goodMessage?>
             </div>
             <?php                         
                       }

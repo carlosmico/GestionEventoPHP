@@ -32,34 +32,40 @@
     <?php
     include __DIR__ . '/../assets/menu.php';
     ?>
-    
-    <form class="loginForm" action="login.php" method="post">
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" aria-describedby="emailHelp" name="email"
+
+    <div class="formsPage">
+        <form class="loginForm" action="login.php" method="post">
+            <h1>Login</h1>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" aria-describedby="emailHelp" name="email"
                 placeholder="Introduce email">
-        </div>
+            </div>
 
-        <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" class="form-control" name="password" placeholder="Introduce contraseña">
-        </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" name="password" placeholder="Introduce contraseña">
+            </div>
         
-        <?php
-           if ($error != null) {
+            <?php
+            if ($error != null) {
                     ?>
-        <div class="alert alert-danger" role="alert">
-            <?=$error?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?=$error?>
+            </div>
         
-        <?php                         
+            <?php                         
                       }
-        ?>
+            ?>
 
-        <div>
-            <button type="submit" class="btn btn-primary" name="action" value="login">Login</button>
-        </div>
-    </form>
+            <div>
+                <button type="submit" class="btn btn-primary" name="action" value="login">Login</button>
+            </div>
+        </form>
+    </div>
+    
+    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
