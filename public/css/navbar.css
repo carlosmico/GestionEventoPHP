@@ -1,0 +1,48 @@
+.navbar{
+    /* background-color: yellow !important; */
+    background-image: url("http://ctosummit.geekshubs.com/wp-content/uploads/2019/02/fondo-cto-summit-1.svg");
+    background-size: cover;
+    padding: 1em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar-brand > img{
+    max-width: 55vw;
+    width: 250px;
+}
+
+.navbar-toggler{
+    background-color: #641d36;
+}
+
+.navbar-light .navbar-toggler-icon{
+    background-image: url("../images/menu.png") !important;
+}
+
+.collapse{
+    justify-content: flex-end;
+}
+
+.nav-link{
+    color: #e8508b !important;
+    margin: 0.5em;
+    transition-duration: 0.5s;
+    border-radius: 10px;
+}
+
+.nav-link:hover{
+    color: white !important;
+    transition-duration: 0.5s;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+
+.nav-link:first-child:hover{
+    background-color: #e82f8c;
+}
+
+.nav-link:last-child:hover{
+    background-color: #641d36;
+}
