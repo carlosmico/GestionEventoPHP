@@ -4,7 +4,7 @@ namespace Geeks\model;
 class DB
 {
   private $host="localhost";
-  private $db="cenaconasesinado";
+  private $db="ctoSummit";
   private $user="root";
   private $pass;
   public $conexion=null;
@@ -26,7 +26,15 @@ class DB
     return $error;
   }
 
-  public function consulta($query,$params){
+  public function consultaSimple($query){
+    $error=null;
+
+    $this->resultado = $this->conexion->query($query)->fetchAll();
+
+    return $error;
+  }
+
+  public function consultaPreparada($query,$params){
     $error=null;
     $sentencia = $this->conexion->prepare($query);
     $this->resultado=$sentencia;
@@ -36,6 +44,7 @@ class DB
     }
 
     $error=$sentencia->execute();
+
     return $error;
   }
 }

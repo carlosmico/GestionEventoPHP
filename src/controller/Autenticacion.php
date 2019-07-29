@@ -1,6 +1,6 @@
 <?php
 namespace Geeks\controller;
-use Geeks\model\Usuario as Usuario;
+use Geeks\model\User as User;
 
 class Autenticacion{
     private $salt = "StringAModificarParaHacerSeguro";
@@ -8,59 +8,123 @@ class Autenticacion{
 
     function __construct (){
         session_start();
-        if(!isset($_SESSION["id"])&&(basename($_SERVER["REQUEST_URI"])!="index.php")) header('Location: index.php');
+
+        $this->checkLogin();
+    }
+
+    public function register($email, $name, $surnames, $company, $age, $genre, $password){
+        $passwordEncrypted = crypt($password, $this->salt);
+        
+        //Creamos el usuario
+        $u=new User(
+            $email,
+            $name,
+            $surnames,
+            $age,
+            $company,        
+            $genre,
+            $passwordEncrypted
+        );
+
+
+        //Registramos en la base de datos
+        return $u->register();
+    }
+
+    public function updateUser($id, $data){
+        $passwordEncrypted = crypt($data['password'], $this->salt);
+
+        $u = new User(
+            $data['email'],
+            $data['name'],
+            $data['surnames'],
+            $data['age'],
+            $data['company'],
+            "",
+            $data['password']
+        );
+
+        $u -> setId($id);
+
+        //Actualizamos el usuario en la base de datos
+        return $u -> update();
+    }
+
+    public function login($email = null, $password = null){
+        $error=null;
+
+        //Comprobamos los campos recibidos
+        if($email == null || !isset($email) || strlen($email) == 0){
+            $error = "Credenciales erróneas";
+        }else if ($password == null || !isset($password) || strlen($password) == 0){
+            $error = "Credenciales erróneas";
+        }else {
+            //Si los campos estan bien checkeamos que se correspondan con los del usuari de la BD
+            $result = $this->checkUser($email, $password);
+
+            if($result == false){
+                $error = "Credenciales erróneas";
+            }else{
+                $_SESSION["id"]=$this->u->getId();
+                $_SESSION["email"]=$this->u->getEmail();
+                $_SESSION["role"]=$this->u->getRole();
+                header('Location: index.php');
+                return null;
+            }
+        }
+
+        return $error;
     }
 
     public function checkLogin($user=null,$pass=null){
-        $error=null;
-        if($user==null||!isset($user)||strlen($user)==0){
-            $error="No se ha introducido el usuario";
-        }elseif($pass==null||!isset($pass)||strlen($pass)==0){
-            $error="No se ha introducido el password";
-        }else{
-            $error=$this->registrarDB($datos["email"],$datos["passwordField"]);
-            if($error==true) $error=null;
+        $requestUri = basename($_SERVER["REQUEST_URI"]);
+
+        //Si existe el id es porque el usuario esta loggeado y por tanto abandonamos la funcion
+        if(isset($_SESSION['id'])){
+            if($requestUri == "index.php"){
+                header("Location: main.php");
+            }
+        }else if($requestUri != "index.php" && $requestUri != "register.php" && $requestUri != "login.php"){
+                header("Location: index.php");
         }
-        return $error;
     }
 
 
-    public function logar($datos=null){
-        $error=null;
-        if(!isset($datos["email"])||!isset($datos["passwordField"])){
-            $error="No se ha introducido algún campo en el logado";
-        }elseif($datos["email"]==null||strlen($datos["email"])==0){
-            $error="No se ha introducido el email";
-        }elseif($datos["passwordField"]==null||strlen($datos["passwordField"])==0){
-            $error="No se ha introducido el password";
-        }else{
-                $resultado=$this->comprobarUsuario($datos["email"],$datos["passwordField"]);
-                if($resultado==false){
-                    return "El usuario no existe";
-                }else{
-                    $_SESSION["id"]=$this->u->getId();
-                    $_SESSION["role"]=$this->u->getRole();
-                    header('Location: reto1.php');
-                    return null;
-                }
-        }
-        return $error;
+    private function checkUser($email=null,$password=null){
+        
+        //Creamos el objeto del modelo User
+        $u=new User($email, "","","","","", crypt($password,$this->salt));
+
+        //Seteamos nuestra variable $this->u global a $u para poder obtener sus datos en la funcion Login
+        $this->u = $u;
+
+        return $u->checkUser();
     }
 
-    private function registrarDB($user=null,$pass=null){
-        //Creamos el usuario
-        $u=new Usuario($user,crypt($pass,$this->salt));
-        //Registramos en la base de datos
-        return $u->nuevoUsuario();
+    public function getUser($id){
+        $u = new User();
+        $u -> setId($id);
+        return $u -> getUser();
     }
 
-    private function comprobarUsuario($user=null,$pass=null){
-            //Creamos el usuario
-            $u=new Usuario($user,crypt($pass,$this->salt));
-            $this->u=$u;
-            //Registramos en la base de datos
-            return $this->u->comprobarUsuario();
+    public function getAsistants(){
+        $u = new User();
 
+        return $u->getAllUsers();
     }
+
+    public function deleteAsistant($id){
+        $u = new User();
+
+        $u->setId($id);
+
+        return $u->deleteUser();
+    }
+
+
+    
+
+
+    
 
 }
