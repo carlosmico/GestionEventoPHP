@@ -251,12 +251,10 @@ form div:last-child{
 }
 
 .logout{
-    position: fixed;
-    bottom: 0;
-    margin-bottom: 3em;
+    margin: 3em;
     width: 150px;
     text-align: center;
-    background-color: #631d36;
+    background-color: tomato;
     color: white;
     padding-top: 0.7em;
     padding-bottom: 0.7em;

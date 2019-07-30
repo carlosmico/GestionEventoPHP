@@ -3,10 +3,15 @@ namespace Geeks\model;
 
 class DB
 {
-  private $host = "remotemysql.com";
-  private $db = "WL7EFoixXi";
-  private $user = "WL7EFoixXi";
-  private $pass = "EaXLYf4TyF";
+  // private $host = "remotemysql.com";
+  // private $db = "WL7EFoixXi";
+  // private $user = "WL7EFoixXi";
+  // private $pass = "EaXLYf4TyF";
+
+  private $host = "localhost";
+  private $db = "ctoSummit";
+  private $user = "root";
+  private $pass = "";
 
   public $conexion=null;
   public $resultado;

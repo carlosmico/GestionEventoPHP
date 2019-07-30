@@ -13,30 +13,16 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-
-            <?php
-              if(isset($_SESSION['email'])){
-
-                if($_SESSION['role'] == "ADMIN"){
-                  ?>
-                  <a class="nav-item nav-link" href="asistants.php">Ver asistentes</a>
-                  <?php
-                }
-            ?>
-
-            <a class="nav-item nav-link" href="profile.php"><?php echo $_SESSION['email'];?></a>
-            
-            <?php
-              }else{
-            ?>
-
+        <ul class="navbar-nav mr-auto">
+            <?php if(isset($_SESSION['email'])) : ?>
+              <?php if(isset($_SESSION['email'])) : ?>
+              <a class="nav-item nav-link" href="asistants.php">Ver asistentes</a>
+              <?php endif;?>
+              <a class="nav-item nav-link" href="profile.php"><?php echo $_SESSION['email'];?></a>
+            <?php else : ?>
               <a class="nav-item nav-link" href="register.php">Registro</a>
               <a class="nav-item nav-link"  href="login.php">Login</a>
-            
-            <?php
-              }
-            ?>
-        </div>
+            <?php endif; ?>
+        </ul>
     </div>
 </nav>
