@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../public/css/navbar.css">
+<link rel="stylesheet" href="../css/navbar.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
