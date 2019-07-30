@@ -21,9 +21,9 @@ class DB
   public function cargaConfiguracion(){
     if(isset($_ENV['DB_DATABASE'])){
       $this->host = "remotemysql.com";
-      $this->db = "WL7EFoixXi";
-      $this->user = "WL7EFoixXi";
-      $this->pass = "EaXLYf4TyF";
+      $this->db = $_ENV['DB_DATABASE'];
+      $this->user = $_ENV['DB_USERNAME'];
+      $this->pass = $_ENV['DB_PASSWORD'];
     }else{
       $this->host = "localhost";
       $this->db = "ctoSummit";
