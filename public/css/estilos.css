@@ -266,7 +266,7 @@ form div:last-child{
 
 .logout:hover{
     color: white;
-    background-color: #e82f8c;
+    background-color: red;
     transition-duration: 0.5s;
     text-decoration: none;
 }
