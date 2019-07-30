@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../public/css/navbar.css">
 <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,7 +13,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav mr-auto">
+        <div class="navbar-nav">
             <?php if(isset($_SESSION['email'])) : ?>
               <?php if(isset($_SESSION['email'])) : ?>
               <a class="nav-item nav-link" href="asistants.php">Ver asistentes</a>
@@ -23,6 +23,6 @@
               <a class="nav-item nav-link" href="register.php">Registro</a>
               <a class="nav-item nav-link"  href="login.php">Login</a>
             <?php endif; ?>
-        </ul>
+        </div>
     </div>
 </nav>
