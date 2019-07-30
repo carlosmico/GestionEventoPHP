@@ -1,16 +1,13 @@
 <?php
 namespace Geeks\model;
 
+$server = null;
+
 class DB
 {
-  // private $host = "remotemysql.com";
-  // private $db = "WL7EFoixXi";
-  // private $user = "WL7EFoixXi";
-  // private $pass = "EaXLYf4TyF";
-
-  private $host = "localhost";
-  private $db = "ctoSummit";
-  private $user = "root";
+  private $host = "";
+  private $db = "";
+  private $user = "";
   private $pass = "";
 
   public $conexion=null;
@@ -21,8 +18,24 @@ class DB
 
   }
 
+  public function cargaConfiguracion(){
+    if(isset($_ENV['DB_DATABASE'])){
+      $this->host = "remotemysql.com";
+      $this->db = "WL7EFoixXi";
+      $this->user = "WL7EFoixXi";
+      $this->pass = "EaXLYf4TyF";
+    }else{
+      $this->host = "localhost";
+      $this->db = "ctoSummit";
+      $this->user = "root";
+      $this->pass = "";
+    }
+  }
 
   public function conectar(){
+
+    $this->cargaConfiguracion();
+
     $error=null;
     try {
         $this->conexion = new \PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
